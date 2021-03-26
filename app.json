@@ -1,0 +1,12 @@
+{
+  "name": "daema-time",
+  "displayName": "daema-time",
+  "expo": {
+    "name": "daema-time",
+    "slug": "daema-time",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
