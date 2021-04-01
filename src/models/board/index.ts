@@ -1,6 +1,7 @@
 export type board = {
-  id: string;
   name: string;
+  id: number;
+  explain: string;
 };
 
 export type uploader = {

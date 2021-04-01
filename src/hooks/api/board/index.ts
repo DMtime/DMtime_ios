@@ -3,9 +3,11 @@ import { getRequestWithAccessToken } from "../default";
 
 const request = getRequestWithAccessToken();
 
-export const getBoardList = async () => {
+export const getBoardList = async (isDefault?: boolean) => {
   try {
-    const { data } = await request.get("/board/galleries");
+    const { data } = await request.get(
+      `/board/galleries?is-default=${isDefault ? "true" : "false"}`
+    );
     return data;
   } catch (error) {
     console.log(error);

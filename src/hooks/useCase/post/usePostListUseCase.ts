@@ -2,12 +2,14 @@ import { useEffect } from "react";
 import { getPost, getPostList } from "../../api/post";
 import usePostList from "../../domain/post/usePostList";
 
-const usePostUseCase = (id: number) => {
+const usePostListUseCase = (id: number) => {
   const { postList, setPostList, setPage, page } = usePostList(id);
 
   const getPostListAndSetState = async () => {
-    const data = await getPostList(id, page);
-    setPostList(data);
+    try {
+      const data = await getPostList(id, page);
+      setPostList(data);
+    } catch (error) {}
   };
 
   const getNextPage = async () => {
@@ -27,4 +29,4 @@ const usePostUseCase = (id: number) => {
   };
 };
 
-export default usePostUseCase;
+export default usePostListUseCase;

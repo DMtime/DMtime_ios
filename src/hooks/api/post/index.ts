@@ -13,7 +13,7 @@ export const getPostList = async (
     );
     return data;
   } catch (error) {
-    console.log(error);
+    throw error.response.status;
   }
 };
 
