@@ -10,9 +10,14 @@ const S = StyleSheet.create({
     top: 0,
   },
   Menu: {
-    width: "70%",
+    width: 265,
     height: "100%",
     backgroundColor: color.item,
+  },
+  MenuWrapper: {
+    height: "100%",
+    backgroundColor: color.item,
+    overflow: "hidden",
   },
   MenuItem: {
     borderBottomColor: color.sub,
