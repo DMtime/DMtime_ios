@@ -4,6 +4,7 @@ const color = {
   font: "black",
   item: "white",
   sub: "#C9C9C9",
+  info: "#8D8D8D",
 };
 
 export default color;
