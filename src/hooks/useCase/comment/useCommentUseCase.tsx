@@ -23,3 +23,5 @@ const useCommentUseCase = (id: number) => {
     getNextCommentAndSetState,
   };
 };
+
+export default useCommentUseCase;
