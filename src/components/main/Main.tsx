@@ -7,7 +7,6 @@ import { board } from "../../models/board";
 
 const Main = () => {
   const { boardList } = useBoardListUseCase(true);
-  console.log(boardList);
   const renderBoardList = (boardList: board[]) =>
     boardList.map((board) => (
       <BoardList boardListTitle={board.name} boardId={board.id} />
