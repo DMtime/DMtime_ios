@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native";
-import { MainPage, BoardDetailPage } from "../pages";
+import { MainPage, BoardDetailPage, PostDetailPage } from "../pages";
 import Header from "../components/header";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
@@ -15,8 +15,9 @@ const S = {
 const RootRouter = () => (
   <NavigationContainer>
     <Drawer.Navigator>
-      <Drawer.Screen name="BoardDetail" component={BoardDetailPage} />
+      <Drawer.Screen name="PostDetail" component={PostDetailPage} />
       <Drawer.Screen name="Main" component={MainPage} />
+      <Drawer.Screen name="BoardDetail" component={BoardDetailPage} />
     </Drawer.Navigator>
   </NavigationContainer>
 );
