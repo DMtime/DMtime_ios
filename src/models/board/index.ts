@@ -20,12 +20,3 @@ export type post = {
   uploader: uploader;
   views: number;
 };
-
-export type comment = {
-  content: string;
-  is_anonymous: boolean;
-  id: number;
-  upper_comment_id: number;
-  writer: uploader;
-  wrote_datetime: string;
-};
