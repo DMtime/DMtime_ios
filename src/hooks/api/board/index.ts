@@ -1,3 +1,4 @@
+import axios from "axios";
 import { board } from "../../../models/board";
 import { getRequestWithAccessToken } from "../default";
 
@@ -10,7 +11,7 @@ export const getBoardList = async (isDefault?: boolean) => {
     );
     return data;
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };
 
@@ -21,7 +22,7 @@ export const createBoard = async (explain: string, name: string) => {
       name,
     });
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };
 
@@ -29,7 +30,7 @@ export const patchBoard = async (id: number, board: board) => {
   try {
     await request.patch(`/board/galleries/${id}`, board);
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };
 
@@ -37,6 +38,6 @@ export const deleteBoard = async (id: number) => {
   try {
     await request.delete(`/board/galleries/${id}`);
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };

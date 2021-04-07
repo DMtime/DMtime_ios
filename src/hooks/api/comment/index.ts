@@ -1,4 +1,4 @@
-import { comment } from "../../../models/board";
+import { comment } from "../../../models/comment";
 import { getRequestWithAccessToken } from "../default";
 
 const request = getRequestWithAccessToken();
@@ -10,7 +10,7 @@ export const getComments = async (id: number, page: number) => {
     );
     return data;
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };
 
@@ -27,7 +27,7 @@ export const setComments = async (
       upper_comment_id: upperCommentId,
     });
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };
 
@@ -44,7 +44,7 @@ export const patchComments = async (
       upper_comment_id: upperCommentId,
     });
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };
 
@@ -52,6 +52,6 @@ export const deleteComments = async (id: number) => {
   try {
     await request.delete(`/board/comments/${id}`);
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };
