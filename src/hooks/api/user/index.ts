@@ -9,7 +9,7 @@ export const getUser = async (userName: string) => {
     const { data } = await request.get<user>(`/users/${userName}`);
     return data;
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };
 
@@ -26,7 +26,7 @@ export const patchUser = async (
       username: newUserName,
     });
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };
 
@@ -42,7 +42,7 @@ export const signup = async (
       email,
     });
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };
 
@@ -82,6 +82,6 @@ export const signin = async (
     );
     return data.access_token;
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };
