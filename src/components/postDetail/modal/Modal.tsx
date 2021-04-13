@@ -77,7 +77,6 @@ const Modal: FC<Props> = ({ imageUrls, modal, setModal }) => {
     return nowPosition;
   }, [dragPoint, startDragPoint]);
   useEffect(() => {
-    console.log(modal);
     if (modal) {
       initModal();
     } else {

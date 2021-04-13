@@ -15,7 +15,6 @@ interface Props {
 
 // 자기 댓글이면 삭제 버튼 나오게 설정해야함
 const Comments: FC<Props> = ({ comments, addComment }) => {
-  console.log(comments);
   const renderedComment = useMemo(() => {
     return comments.map((comment) => (
       <Comment
