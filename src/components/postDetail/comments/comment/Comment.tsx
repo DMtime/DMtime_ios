@@ -13,6 +13,12 @@ interface Props {
   writeDate: string;
   id: number;
   isSub?: boolean;
+  upperCaseCommentId?: number;
+  addComment: (
+    isAnonymous: boolean,
+    content: string,
+    upperCaseCommentId?: number
+  ) => void;
 }
 
 const Comment: FC<Props> = ({
@@ -23,6 +29,8 @@ const Comment: FC<Props> = ({
   writeDate,
   id,
   isSub,
+  addComment,
+  upperCaseCommentId,
 }) => {
   const [openInput, setOpenInput] = useState(false);
   const renderedSubComment = useMemo(() => {
@@ -31,13 +39,15 @@ const Comment: FC<Props> = ({
       .map((comment) => (
         <Comment
           key={`comment-${comment.id}`}
-          userImage={comment.writer.username}
+          userImage={null}
           userName={comment.writer.username}
           content={comment.content}
           id={comment.id}
           writeDate={comment.wrote_datetime}
           comments={comments}
           isSub={true}
+          addComment={addComment}
+          upperCaseCommentId={comment.upper_comment_id}
         />
       ));
   }, [comments]);
@@ -49,7 +59,7 @@ const Comment: FC<Props> = ({
       <View style={{ ...S.Comment, paddingLeft: isSub ? 20 : 0 }}>
         <View style={S.CommentInfoWrapper}>
           <Image
-            source={userImage ? userImage : defaultUserImage}
+            source={userImage ? { uri: userImage } : defaultUserImage}
             style={S.CommentUserImage}
           />
           <View>
@@ -73,7 +83,14 @@ const Comment: FC<Props> = ({
           </TouchableOpacity>
         </View>
       </View>
-      {openInput ? <Input /> : <></>}
+      {openInput ? (
+        <Input
+          addComment={addComment}
+          upperCaseCommentId={upperCaseCommentId}
+        />
+      ) : (
+        <></>
+      )}
       <View style={S.SubCommentWrapper}>{renderedSubComment}</View>
     </>
   );

@@ -6,19 +6,27 @@ import Comment from "./comment";
 
 interface Props {
   comments: comment[];
+  addComment: (
+    isAnonymous: boolean,
+    content: string,
+    upperCaseCommentId?: number
+  ) => void;
 }
 
-const Comments: FC<Props> = ({ comments }) => {
+// 자기 댓글이면 삭제 버튼 나오게 설정해야함
+const Comments: FC<Props> = ({ comments, addComment }) => {
+  console.log(comments);
   const renderedComment = useMemo(() => {
     return comments.map((comment) => (
       <Comment
         key={`comment-${comment.id}`}
-        userImage={comment.writer.username}
+        userImage={null}
         userName={comment.writer.username}
         content={comment.content}
         comments={comments}
         writeDate={comment.wrote_datetime}
         id={comment.id}
+        addComment={addComment}
       />
     ));
   }, [comments]);
