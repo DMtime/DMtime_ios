@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { comment } from "../../../models/board";
+import { comment } from "../../../models/comment";
 
 const useComment = () => {
   const [comments, setComments] = useState<comment[]>([]);
-  const [page, setPage] = useState<number>(0);
+  const [page, setPage] = useState<number>(1);
   return {
     comments,
     setComments,
