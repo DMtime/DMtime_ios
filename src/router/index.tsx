@@ -3,10 +3,10 @@ import { SafeAreaView } from "react-native";
 import { MainPage, BoardDetailPage, PostDetailPage } from "../pages";
 import Header from "../components/header";
 import { NavigationContainer } from "@react-navigation/native";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import { createStackNavigator } from "@react-navigation/stack";
 import Menu from "../components/menu";
 
-const Drawer = createDrawerNavigator();
+const Stack = createStackNavigator();
 
 const S = {
   flex: 1,
@@ -14,11 +14,23 @@ const S = {
 
 const RootRouter = () => (
   <NavigationContainer>
-    <Drawer.Navigator>
-      <Drawer.Screen name="PostDetail" component={PostDetailPage} />
-      <Drawer.Screen name="Main" component={MainPage} />
-      <Drawer.Screen name="BoardDetail" component={BoardDetailPage} />
-    </Drawer.Navigator>
+    <Stack.Navigator initialRouteName="Main">
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="BoardDetail"
+        component={BoardDetailPage}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="PostDetail"
+        component={PostDetailPage}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="Main"
+        component={MainPage}
+      />
+    </Stack.Navigator>
   </NavigationContainer>
 );
 
