@@ -13,7 +13,8 @@ const BoardDetail = () => {
         date={post.posted_datetime}
         title={post.title}
         writer={post.uploader.username}
-        like={post.likes}
+        like={post.number_of_likes}
+        id={post.id}
       />
     ));
   return (

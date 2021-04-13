@@ -1,5 +1,6 @@
+import { useNavigation } from "@react-navigation/native";
 import React, { FC } from "react";
-import { Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import S from "../style";
 
 interface Props {
@@ -7,11 +8,21 @@ interface Props {
   writer: string;
   date: string;
   like: number;
+  id: number;
 }
 
-const BoardDetailItem: FC<Props> = ({ title, writer, date, like }) => {
+const BoardDetailItem: FC<Props> = ({ title, writer, date, like, id }) => {
+  const navigation = useNavigation();
+  const itemClickHandler = () => {
+    navigation.navigate("PostDetail", {
+      postId: id,
+    });
+  };
   return (
-    <View style={S.BoardDetailItemWrapper}>
+    <TouchableOpacity
+      onPress={itemClickHandler}
+      style={S.BoardDetailItemWrapper}
+    >
       <View style={S.BoardDetailItem}>
         <View>
           <Text style={S.BoardDetailItemTitle}>{title}</Text>
@@ -36,7 +47,7 @@ const BoardDetailItem: FC<Props> = ({ title, writer, date, like }) => {
           </View>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
