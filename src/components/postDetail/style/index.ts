@@ -11,6 +11,11 @@ const S = StyleSheet.create({
     width: 18,
     height: 10,
   },
+  NavigationWrapper: {
+    marginBottom: 30,
+    padding: 6,
+    width: "100%",
+  },
   Header: {
     borderTopColor: color.sub,
     borderBottomColor: color.sub,
@@ -205,6 +210,35 @@ const S = StyleSheet.create({
   CommentWriteButtonText: {
     fontSize: 12,
     fontWeight: "bold",
+  },
+  ImageWrapper: {
+    marginTop: 26,
+    marginBottom: 26,
+    flexDirection: "row",
+  },
+  Image: {
+    marginRight: 8,
+    width: 120,
+    height: 100,
+  },
+  ModalImage: {
+    width: 300,
+    height: 200,
+  },
+  ImageModal: {
+    width: "100%",
+    height: "100%",
+    position: "absolute",
+    backgroundColor: "rgba(0,0,0,0.5)",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  ImageModalWrapper: {
+    width: "100%",
+    height: 200,
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 100,
   },
 });
 
