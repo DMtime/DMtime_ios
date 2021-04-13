@@ -2,12 +2,11 @@ import axios from "axios";
 import { board } from "../../../models/board";
 import { getRequestWithAccessToken } from "../default";
 
-const request = getRequestWithAccessToken();
-
 export const getBoardList = async (isDefault?: boolean) => {
+  const request = await await getRequestWithAccessToken();
   try {
     const { data } = await request.get(
-      `/board/galleries?is-default=${isDefault ? "true" : "false"}`
+      `/board/galleries?gallery-type=${isDefault ? 1 : 2}`
     );
     return data;
   } catch (error) {
@@ -16,6 +15,7 @@ export const getBoardList = async (isDefault?: boolean) => {
 };
 
 export const createBoard = async (explain: string, name: string) => {
+  const request = await await getRequestWithAccessToken();
   try {
     await request.post("/board/galleries", {
       explain,
@@ -27,6 +27,7 @@ export const createBoard = async (explain: string, name: string) => {
 };
 
 export const patchBoard = async (id: number, board: board) => {
+  const request = await await getRequestWithAccessToken();
   try {
     await request.patch(`/board/galleries/${id}`, board);
   } catch (error) {
@@ -35,6 +36,7 @@ export const patchBoard = async (id: number, board: board) => {
 };
 
 export const deleteBoard = async (id: number) => {
+  const request = await await getRequestWithAccessToken();
   try {
     await request.delete(`/board/galleries/${id}`);
   } catch (error) {

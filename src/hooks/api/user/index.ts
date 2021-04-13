@@ -1,10 +1,8 @@
 import { user } from "../../../models/user";
 import { getRequest, getRequestWithAccessToken } from "../default";
 
-const request = getRequestWithAccessToken();
-const requestWithOutToken = getRequest();
-
 export const getUser = async (userName: string) => {
+  const request = await getRequestWithAccessToken();
   try {
     const { data } = await request.get<user>(`/users/${userName}`);
     return data;
@@ -19,6 +17,7 @@ export const patchUser = async (
   newUserExplain: string,
   profileImageId: number
 ) => {
+  const request = await getRequestWithAccessToken();
   try {
     await request.patch(`/users/${userName}`, {
       profile_image_id: profileImageId,
@@ -35,6 +34,7 @@ export const signup = async (
   email: string,
   password: string
 ) => {
+  const requestWithOutToken = getRequest();
   try {
     await requestWithOutToken.post("/users", {
       username,
@@ -49,6 +49,7 @@ export const signup = async (
 export const emailDuplicationCheck = async (
   email: string
 ): Promise<boolean> => {
+  const requestWithOutToken = getRequest();
   try {
     const { data } = await requestWithOutToken.get<{ useable: boolean }>(
       `/users/email-duplication?email=${email}`
@@ -60,6 +61,7 @@ export const emailDuplicationCheck = async (
 export const userNameDuplicationCheck = async (
   userName: string
 ): Promise<boolean> => {
+  const requestWithOutToken = getRequest();
   try {
     const { data } = await requestWithOutToken.get<{ useable: boolean }>(
       `/users/username-duplication?username=${userName}`
@@ -72,6 +74,7 @@ export const signin = async (
   email: string,
   password: string
 ): Promise<string> => {
+  const requestWithOutToken = getRequest();
   try {
     const { data } = await requestWithOutToken.post<{ access_token: string }>(
       "/token",

@@ -1,25 +1,25 @@
 import { comment } from "../../../models/comment";
 import { getRequestWithAccessToken } from "../default";
 
-const request = getRequestWithAccessToken();
-
-export const getComments = async (id: number, page: number) => {
+export const getCommentsRequest = async (id: number, page: number) => {
+  const request = await getRequestWithAccessToken();
   try {
-    const { data } = await request.get<comment>(
+    const { data } = await request.get<{ comments: comment[] }>(
       `/board/comments?post-id=${id}&page=${page}&page-per=20`
     );
-    return data;
+    return data.comments;
   } catch (error) {
     throw error;
   }
 };
 
-export const setComments = async (
+export const setCommentsRequest = async (
   isAnonymous: boolean,
   content: string,
   postId: number,
   upperCommentId?: number
 ) => {
+  const request = await getRequestWithAccessToken();
   try {
     await request.post(`/board/comments?post-id=${postId}`, {
       is_anonymous: isAnonymous,
@@ -37,6 +37,7 @@ export const patchComments = async (
   postId: number,
   upperCommentId?: number
 ) => {
+  const request = await getRequestWithAccessToken();
   try {
     await request.post(`/board/comments?post-id=${postId}`, {
       is_anonymous: isAnonymous,
@@ -49,6 +50,7 @@ export const patchComments = async (
 };
 
 export const deleteComments = async (id: number) => {
+  const request = await getRequestWithAccessToken();
   try {
     await request.delete(`/board/comments/${id}`);
   } catch (error) {
