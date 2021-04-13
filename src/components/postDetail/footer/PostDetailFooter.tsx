@@ -10,18 +10,25 @@ import {
 interface Props {
   like: number;
   dislike: number;
+  toggleDislike: () => void;
+  toggleLike: () => void;
 }
 
-const PostDetailFooter: FC<Props> = ({ like, dislike }) => {
+const PostDetailFooter: FC<Props> = ({
+  like,
+  dislike,
+  toggleDislike,
+  toggleLike,
+}) => {
   return (
     <View style={S.Footer}>
       <View style={S.LikeButtonWrapper}>
-        <TouchableOpacity style={S.LikeButton}>
+        <TouchableOpacity style={S.LikeButton} onPress={toggleLike}>
           <Image source={likeImage} style={S.LikeButtonImage} />
           <Text>{like}</Text>
         </TouchableOpacity>
         <View style={S.ButtonLine} />
-        <TouchableOpacity style={S.LikeButton}>
+        <TouchableOpacity style={S.LikeButton} onPress={toggleDislike}>
           <Image source={dislikeImage} style={S.LikeButtonImage} />
           <Text>{dislike}</Text>
         </TouchableOpacity>
