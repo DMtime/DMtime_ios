@@ -1,5 +1,9 @@
 import useSignUp from "../../domain/user/useSignUp";
-import { signup } from "../../api/user";
+import {
+  emailDuplicationCheck,
+  signup,
+  userNameDuplicationCheck,
+} from "../../api/user";
 const useSignUpUseCase = () => {
   const {
     setEmail,
@@ -14,6 +18,14 @@ const useSignUpUseCase = () => {
     signup(nickname, email, password);
   };
 
+  const emailDuplicationCheckWithEmail = async (): Promise<boolean> => {
+    return await emailDuplicationCheck(email);
+  };
+
+  const userNameDuplicationCheckWithUserName = async (): Promise<boolean> => {
+    return await userNameDuplicationCheck(nickname);
+  };
+
   return {
     setEmail,
     setNickName,
@@ -22,6 +34,8 @@ const useSignUpUseCase = () => {
     nickname,
     password,
     signup: signupWithValue,
+    emailDuplicationCheck: emailDuplicationCheckWithEmail,
+    userNameDuplicationCheck: userNameDuplicationCheckWithUserName,
   };
 };
 
