@@ -15,7 +15,12 @@ const BoardList: FC<Props> = ({ boardListTitle, boardId }) => {
   const { postList } = usePostListUseCase(boardId);
   const renderPostList = (postList: post[]) =>
     postList.map((post: post) => (
-      <BoardListItem date={post.posted_datetime} title={post.title} />
+      <BoardListItem
+        date={post.posted_datetime}
+        title={post.title}
+        id={post.id}
+        key={post.id}
+      />
     ));
   return (
     <View style={S.MainBoardList}>
