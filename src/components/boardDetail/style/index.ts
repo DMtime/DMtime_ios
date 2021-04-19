@@ -19,11 +19,14 @@ const S = StyleSheet.create({
   BoardDetailTitleWrapper: {
     height: 54,
     width: "100%",
-    justifyContent: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     backgroundColor: "#FAFAFA",
     borderBottomColor: color.sub,
     borderBottomWidth: 1,
     paddingLeft: 25,
+    paddingRight: 25,
   },
   BoardDetailItem: {
     height: 64,
