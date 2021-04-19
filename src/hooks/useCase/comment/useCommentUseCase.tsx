@@ -33,6 +33,10 @@ const useCommentUseCase = (id: number) => {
     }
   };
 
+  const refreshComment = async () => {
+    await getCommentsAndSetState();
+  };
+
   useEffect(() => {
     getCommentsAndSetState();
   }, []);
@@ -42,6 +46,7 @@ const useCommentUseCase = (id: number) => {
     comments,
     getNextCommentAndSetState,
     addComment,
+    refreshComment,
   };
 };
 

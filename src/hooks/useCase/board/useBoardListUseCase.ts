@@ -10,6 +10,10 @@ const useBoardListUseCase = (isDefault?: boolean) => {
     setBoardList(data);
   };
 
+  const refreshBoardList = async () => {
+    await getBoardListAndSetState();
+  };
+
   useEffect(() => {
     getBoardListAndSetState();
   }, []);
@@ -17,6 +21,7 @@ const useBoardListUseCase = (isDefault?: boolean) => {
   return {
     boardList,
     setBoardList,
+    refreshBoardList,
   };
 };
 

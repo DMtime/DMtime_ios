@@ -11,7 +11,6 @@ import {
 
 const usePostUseCase = (id: number) => {
   const { post, setPost } = usePost();
-
   const setPostReaction = (reaction: "none" | "like" | "dislike") => {
     setPost((post) => ({ ...post, my_reaction: reaction }));
   };
@@ -96,6 +95,10 @@ const usePostUseCase = (id: number) => {
     }
   };
 
+  const refreshPost = async () => {
+    await getPostAndSetState();
+  };
+
   useEffect(() => {
     getPostAndSetState();
   }, []);
@@ -107,6 +110,7 @@ const usePostUseCase = (id: number) => {
     setPostLike,
     setToggleDisLike,
     setToggleLike,
+    refreshPost,
   };
 };
 
