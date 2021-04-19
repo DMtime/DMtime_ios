@@ -1,20 +1,30 @@
-import React from "react";
-import { ScrollView } from "react-native";
+import React, { useMemo } from "react";
+import { View } from "react-native";
 import BoardList from "./boardList";
 import S from "./style";
 import useBoardListUseCase from "../../hooks/useCase/board/useBoardListUseCase";
 import { board } from "../../models/board";
+import DidmountCatcher from "../default/navigation/DidmountCatcher";
 
 const Main = () => {
-  const { boardList } = useBoardListUseCase(true);
-  const renderBoardList = (boardList: board[]) =>
-    boardList.map((board) => (
-      <BoardList boardListTitle={board.name} boardId={board.id} />
-    ));
+  const { boardList, refreshBoardList } = useBoardListUseCase(true);
+
+  const renderedBoardList = useMemo(
+    () =>
+      boardList.map((board) => (
+        <BoardList
+          boardListTitle={board.name}
+          boardId={board.gallery_id}
+          key={board.name}
+        />
+      )),
+    [boardList]
+  );
+
   return (
-    <ScrollView style={S.Main}>
-      {renderBoardList(boardList ? boardList : [])}
-    </ScrollView>
+    <DidmountCatcher mountHandler={refreshBoardList}>
+      <View style={S.Main}>{renderedBoardList}</View>
+    </DidmountCatcher>
   );
 };
 
