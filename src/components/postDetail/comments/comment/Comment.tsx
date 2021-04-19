@@ -13,7 +13,6 @@ interface Props {
   writeDate: string;
   id: number;
   isSub?: boolean;
-  upperCaseCommentId?: number;
   addComment: (
     isAnonymous: boolean,
     content: string,
@@ -30,7 +29,6 @@ const Comment: FC<Props> = ({
   id,
   isSub,
   addComment,
-  upperCaseCommentId,
 }) => {
   const [openInput, setOpenInput] = useState(false);
   const renderedSubComment = useMemo(() => {
@@ -47,7 +45,6 @@ const Comment: FC<Props> = ({
           comments={comments}
           isSub={true}
           addComment={addComment}
-          upperCaseCommentId={comment.upper_comment_id}
         />
       ));
   }, [comments]);
@@ -84,10 +81,7 @@ const Comment: FC<Props> = ({
         </View>
       </View>
       {openInput ? (
-        <Input
-          addComment={addComment}
-          upperCaseCommentId={upperCaseCommentId}
-        />
+        <Input addComment={addComment} upperCaseCommentId={id} />
       ) : (
         <></>
       )}
