@@ -5,6 +5,7 @@ import Header from "../components/header";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Menu from "../components/menu";
+import PostWritePage from "../pages/postWrite/PostWritePage";
 
 const Stack = createStackNavigator();
 
@@ -24,6 +25,11 @@ const RootRouter = () => (
         options={{ headerShown: false }}
         name="PostDetail"
         component={PostDetailPage}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="PostWrite"
+        component={PostWritePage}
       />
       <Stack.Screen
         options={{ headerShown: false }}

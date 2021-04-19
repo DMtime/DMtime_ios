@@ -1,22 +1,19 @@
 export type board = {
   name: string;
-  id: number;
   explain: string;
-  gellary_type: 0 | 1 | 2;
-  gellary_id: string;
+  gallery_type: 0 | 1 | 2;
+  gallery_id: string;
 };
 
 export type uploader = {
   username: string;
 };
 
-export type image = Record<string, string>;
-
 export type post = {
   content: string;
   is_anonymous: boolean;
   id: number;
-  image_ids: image;
+  images: string[];
   number_of_likes: number;
   number_of_dislikes: number;
   posted_datetime: string;

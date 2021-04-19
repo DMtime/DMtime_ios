@@ -5,8 +5,11 @@
     "name": "daema-time",
     "slug": "daema-time",
     "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "infoPlist": {
+        "NSLocationAlwaysUsageDescription": "Some description here"
+      }
+    }
   }
 }
