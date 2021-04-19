@@ -22,6 +22,7 @@ const Input: FC<Props> = ({ addComment, upperCaseCommentId }) => {
   const [content, setContent] = useState<string>("");
   const submitButtonPressHandler = () => {
     addComment(true, content, upperCaseCommentId);
+    setContent("");
   };
   const inputChangeHandler = (
     e: NativeSyntheticEvent<TextInputChangeEventData>
@@ -35,6 +36,7 @@ const Input: FC<Props> = ({ addComment, upperCaseCommentId }) => {
         style={S.CommentWriteInput}
         placeholder="댓글을 입력하세요."
         onChange={inputChangeHandler}
+        value={content}
       />
       <View style={S.CommentWriteButtonWrapper}>
         <TouchableOpacity

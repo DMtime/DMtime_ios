@@ -5,6 +5,8 @@ import {
   likeImage,
   dislikeImage,
   reportImage,
+  likeActiveImage,
+  dislikeActiveImage,
 } from "../../../statics/postDetail";
 
 interface Props {
@@ -12,6 +14,7 @@ interface Props {
   dislike: number;
   toggleDislike: () => void;
   toggleLike: () => void;
+  reaction: string;
 }
 
 const PostDetailFooter: FC<Props> = ({
@@ -19,17 +22,24 @@ const PostDetailFooter: FC<Props> = ({
   dislike,
   toggleDislike,
   toggleLike,
+  reaction,
 }) => {
   return (
     <View style={S.Footer}>
       <View style={S.LikeButtonWrapper}>
         <TouchableOpacity style={S.LikeButton} onPress={toggleLike}>
-          <Image source={likeImage} style={S.LikeButtonImage} />
+          <Image
+            source={reaction === "like" ? likeActiveImage : likeImage}
+            style={S.LikeButtonImage}
+          />
           <Text>{like}</Text>
         </TouchableOpacity>
         <View style={S.ButtonLine} />
         <TouchableOpacity style={S.LikeButton} onPress={toggleDislike}>
-          <Image source={dislikeImage} style={S.LikeButtonImage} />
+          <Image
+            source={reaction === "dislike" ? dislikeActiveImage : dislikeImage}
+            style={S.LikeButtonImage}
+          />
           <Text>{dislike}</Text>
         </TouchableOpacity>
       </View>

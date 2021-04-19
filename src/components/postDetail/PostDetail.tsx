@@ -13,6 +13,8 @@ import Input from "./input";
 import S from "./style";
 import Navigation from "./navigation";
 import Modal from "./modal/Modal";
+import { getImageUrl } from "../../hooks/api/image";
+import DidmountCatcher from "../default/navigation/DidmountCatcher";
 
 type RootStackParamList = {
   postDetail: { postId: number };
@@ -24,14 +26,20 @@ const PostDetail: FC = () => {
   const [modal, setModal] = useState(false);
   const navigation = useNavigation();
   const route = useRoute<ProfileScreenRouteProp>();
+
   const postid = route.params.postId;
-  const { post, setToggleDisLike, setToggleLike } = usePostUseCase(postid);
-  const { comments, addComment } = useCommentUseCase(postid);
+
+  const { post, setToggleDisLike, setToggleLike, refreshPost } = usePostUseCase(
+    postid
+  );
+  const { comments, addComment, refreshComment } = useCommentUseCase(postid);
+
   const addPostContent = (
     isAnonymous: boolean,
     content: string,
     upperCaseCommentId?: number
   ) => addComment(isAnonymous, content, post.id, upperCaseCommentId);
+
   const goBack = () => {
     navigation.goBack();
   };
@@ -39,21 +47,22 @@ const PostDetail: FC = () => {
   const toggleLike = () => {
     setToggleLike(post.id);
   };
+
   const toggleDisLike = () => {
     setToggleDisLike(post.id);
   };
-  // const imageUrls = Object.values(imageIds).map((fileName: string) =>
-  //   getImageUrl(fileName)
-  // );
-  const imageUrls = [
-    "https://imgd.aeplcdn.com/476x268/n/cw/ec/38904/mt-15-front-view.jpeg?q=80",
-    "https://img-19.ccm2.net/8vUCl8TXZfwTt7zAOkBkuDRHiT8=/1240x/smart/b829396acc244fd484c5ddcdcb2b08f3/ccmcms-commentcamarche/20494859.jpg",
-    "https://imgd.aeplcdn.com/476x268/n/cw/ec/38904/mt-15-front-view.jpeg?q=80",
-    "https://img-19.ccm2.net/8vUCl8TXZfwTt7zAOkBkuDRHiT8=/1240x/smart/b829396acc244fd484c5ddcdcb2b08f3/ccmcms-commentcamarche/20494859.jpg",
-  ];
+
+  const imageUrls = post.images.map((fileName: string) =>
+    getImageUrl(fileName)
+  );
+
+  const refreshPostDetail = async () => {
+    await refreshComment();
+    await refreshPost();
+  };
 
   return (
-    <>
+    <DidmountCatcher mountHandler={refreshPostDetail}>
       <ScrollView style={S.PostDetail}>
         <Navigation goBack={goBack} />
         <PostDetailHeader
@@ -72,12 +81,13 @@ const PostDetail: FC = () => {
           dislike={post.number_of_dislikes}
           toggleDislike={toggleDisLike}
           toggleLike={toggleLike}
+          reaction={post.my_reaction}
         />
         <Comments comments={comments} addComment={addPostContent} />
         <Input addComment={addPostContent} />
       </ScrollView>
       <Modal imageUrls={imageUrls} modal={modal} setModal={setModal} />
-    </>
+    </DidmountCatcher>
   );
 };
 
