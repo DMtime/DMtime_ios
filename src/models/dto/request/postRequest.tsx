@@ -1,4 +1,4 @@
-export interface IaddPostRequest {
+export interface AddPostRequest {
   content: string;
   is_anonymous: boolean;
   title: string;
