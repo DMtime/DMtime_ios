@@ -17,13 +17,15 @@ const usePostControlUseCase = (id?: number) => {
 
   const addImagesAndGetUrls = async (files: Blob[]) => {
     const requests = files.map(async (file) => {
-      const { url } = await addImage(file);
-      return url;
+      const image = await addImage(file);
+      return image;
     });
     try {
       const urls = await Promise.all(requests);
       setImages(urls);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error.response);
+    }
   };
 
   const addPost = async (

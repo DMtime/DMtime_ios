@@ -1,19 +1,21 @@
-import { useEffect } from "react";
-import { getUser } from "../../api/user";
+import { getMe, getUser } from "../../api/user";
 import useUser from "../../domain/user/useUser";
 
 const useUserUseCase = () => {
   const { user, setUser } = useUser();
-  const getUserAndSetState = async () => {
-    const data = await getUser();
-    setUser(user);
+  const getUserAndSetState = async (userName: string) => {
+    const data = await getUser(userName);
+    setUser(data);
   };
-  useEffect(() => {
-    getUserAndSetState();
-  }, []);
+  const getMeAndSetState = async () => {
+    const data = await getMe();
+    setUser(data);
+  };
   return {
     user,
     setUser,
+    getUserAndSetState,
+    getMeAndSetState,
   };
 };
 
