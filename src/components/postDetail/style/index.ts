@@ -200,6 +200,8 @@ const S = StyleSheet.create({
   CommentWriteButtonWrapper: {
     width: "100%",
     alignItems: "flex-end",
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   CommentWriteButton: {
     width: 25,
@@ -235,10 +237,11 @@ const S = StyleSheet.create({
   },
   ImageModalWrapper: {
     width: "100%",
-    height: 200,
+    height: 400,
     justifyContent: "center",
     alignItems: "center",
     zIndex: 100,
+    marginTop: 150,
   },
 });
 

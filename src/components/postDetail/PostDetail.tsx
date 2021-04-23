@@ -62,8 +62,8 @@ const PostDetail: FC = () => {
   };
 
   return (
-    <DidmountCatcher mountHandler={refreshPostDetail}>
-      <ScrollView style={S.PostDetail}>
+    <>
+      <DidmountCatcher style={S.PostDetail} mountHandler={refreshPostDetail}>
         <Navigation goBack={goBack} />
         <PostDetailHeader
           date={post.posted_datetime}
@@ -85,9 +85,9 @@ const PostDetail: FC = () => {
         />
         <Comments comments={comments} addComment={addPostContent} />
         <Input addComment={addPostContent} />
-      </ScrollView>
+      </DidmountCatcher>
       <Modal imageUrls={imageUrls} modal={modal} setModal={setModal} />
-    </DidmountCatcher>
+    </>
   );
 };
 
