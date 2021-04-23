@@ -65,13 +65,12 @@ const S = StyleSheet.create({
     width: "100%",
     height: 120,
     flexDirection: "row",
+    padding: 10,
   },
   Image: {
     width: 120,
     height: 100,
     marginRight: 8,
-    borderWidth: 1,
-    borderColor: "black",
   },
 });
 

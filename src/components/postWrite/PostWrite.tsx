@@ -3,7 +3,6 @@ import React, { useEffect, useMemo } from "react";
 import {
   Button,
   Image,
-  ImageBackground,
   NativeSyntheticEvent,
   Text,
   TextInputChangeEventData,
@@ -11,6 +10,7 @@ import {
   View,
 } from "react-native";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
+import config from "../../config/config";
 import { useCamera } from "../../hooks/permission/usePermission";
 import usePostControlUseCase from "../../hooks/useCase/post/usePostControlUseCase";
 import { leftArrowImage } from "../../statics/postDetail";
@@ -70,18 +70,28 @@ const PostWrite = () => {
   const goBackButtonClickHandler = () => {
     navigation.goBack();
   };
-
   const renderedImage = useMemo(
     () =>
       images.map((image, index) => {
-        return <Image source={{ uri: image }} style={S.Image} key={index} />;
+        return (
+          <Image
+            source={{ uri: `${config.IMAGE_URL}${image}` }}
+            style={S.Image}
+            key={index}
+          />
+        );
       }),
     [images]
   );
 
   useEffect(() => {
+    console.log(files);
     addImagesAndGetUrls(files);
   }, [files]);
+
+  useEffect(() => {
+    console.log(images);
+  }, [images]);
 
   useEffect(() => {
     if (boardId.length < 0) {
@@ -113,7 +123,9 @@ const PostWrite = () => {
           scrollEnabled={false}
           value={postContent}
         />
-        <View style={S.ImageWrapper}>{renderedImage}</View>
+        <ScrollView horizontal={true} style={S.ImageWrapper}>
+          {renderedImage}
+        </ScrollView>
       </ScrollView>
       <View style={S.Footer}>
         <Checkbox setValue={setAnonymous} value={anonymous}>
