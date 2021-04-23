@@ -7,6 +7,7 @@ import {
   TextInputChangeEventData,
   NativeSyntheticEvent,
 } from "react-native";
+import Checkbox from "../../default/checkbox";
 import S from "../style";
 
 interface Props {
@@ -20,8 +21,9 @@ interface Props {
 
 const Input: FC<Props> = ({ addComment, upperCaseCommentId }) => {
   const [content, setContent] = useState<string>("");
+  const [anonymous, setAnonymous] = useState<boolean>(true);
   const submitButtonPressHandler = () => {
-    addComment(true, content, upperCaseCommentId);
+    addComment(anonymous, content, upperCaseCommentId);
     setContent("");
   };
   const inputChangeHandler = (
@@ -39,6 +41,9 @@ const Input: FC<Props> = ({ addComment, upperCaseCommentId }) => {
         value={content}
       />
       <View style={S.CommentWriteButtonWrapper}>
+        <Checkbox setValue={setAnonymous} value={anonymous} fontSize={12}>
+          익명으로 작성
+        </Checkbox>
         <TouchableOpacity
           onPress={submitButtonPressHandler}
           style={S.CommentWriteButton}
