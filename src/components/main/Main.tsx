@@ -3,7 +3,6 @@ import { View } from "react-native";
 import BoardList from "./boardList";
 import S from "./style";
 import useBoardListUseCase from "../../hooks/useCase/board/useBoardListUseCase";
-import { board } from "../../models/board";
 import DidmountCatcher from "../default/navigation/DidmountCatcher";
 
 const Main = () => {
