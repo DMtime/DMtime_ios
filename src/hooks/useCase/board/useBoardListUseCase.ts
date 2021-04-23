@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import useBoardList from "../../domain/board/useBoardList";
-import { getBoardList } from "../../api/board";
+import { getBoardListRequest } from "../../api/board";
 
 const useBoardListUseCase = (isDefault?: boolean) => {
   const { boardList, setBoardList } = useBoardList();
 
   const getBoardListAndSetState = async () => {
-    const data = await getBoardList(isDefault);
+    const data = await getBoardListRequest(isDefault);
     setBoardList(data);
   };
 

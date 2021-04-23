@@ -1,12 +1,12 @@
-import axios from "axios";
 import { board } from "../../../models/board";
+import { AddBoardRequest } from "../../../models/dto/request/boardRequest";
 import { getRequestWithAccessToken } from "../default";
 
-export const getBoardList = async (isDefault?: boolean) => {
+export const getBoardListRequest = async (isDefault?: boolean) => {
   const request = await getRequestWithAccessToken();
   try {
     const { data } = await request.get(
-      `/board/galleries?gallery-type=${isDefault ? 1 : 2}`
+      `/board/galleries?${isDefault ? "gallery-type=1" : ""}`
     );
     return data;
   } catch (error) {
@@ -14,19 +14,27 @@ export const getBoardList = async (isDefault?: boolean) => {
   }
 };
 
-export const createBoard = async (explain: string, name: string) => {
+export const addBoardRequest = async ({
+  explain,
+  name,
+  gallery_id,
+  gallery_type,
+}: AddBoardRequest) => {
   const request = await getRequestWithAccessToken();
   try {
     await request.post("/board/galleries", {
       explain,
       name,
+      gallery_id,
+      gallery_type,
     });
   } catch (error) {
+    console.log(error.response);
     throw error;
   }
 };
 
-export const patchBoard = async (id: string, board: board) => {
+export const patchBoardRequest = async (id: string, board: board) => {
   const request = await getRequestWithAccessToken();
   try {
     await request.patch(`/board/galleries/${id}`, board);
@@ -35,7 +43,7 @@ export const patchBoard = async (id: string, board: board) => {
   }
 };
 
-export const deleteBoard = async (id: string) => {
+export const deleteBoardRequest = async (id: string) => {
   const request = await getRequestWithAccessToken();
   try {
     await request.delete(`/board/galleries/${id}`);

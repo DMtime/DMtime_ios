@@ -1,8 +1,7 @@
-import config from "../../../config/config";
 import { getRequest, getRequestWithAccessToken } from "../default";
 
 export const getImageUrl = (fileName: string) => {
-  return `${config.BASE_URL}/${fileName}`;
+  return fileName;
 };
 
 export const deleteImage = async (fileName: string) => {
@@ -19,13 +18,19 @@ export const addImage = async (file: Blob) => {
     const request = getRequest();
     const formData = new FormData();
     formData.append("image", file);
-    const { data } = await request.post<{ url: string }>(`/images`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-    return data;
+    const { data } = await request.post<{ image: string }>(
+      `/images`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    console.log(data);
+    return data.image;
   } catch (error) {
+    console.log(error.response);
     throw error;
   }
 };

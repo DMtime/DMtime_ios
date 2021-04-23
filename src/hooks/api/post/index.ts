@@ -1,6 +1,6 @@
 import { post } from "../../../models/board";
 import { getRequestWithAccessToken } from "../default";
-import { IaddPostRequest } from "../../../models/dto/request/postRequest";
+import { AddPostRequest } from "../../../models/dto/request/postRequest";
 
 export const getPostList = async (
   id: string,
@@ -32,7 +32,7 @@ export const getPopularPostList = async (page: number): Promise<post[]> => {
 
 export const addPostRequest = async (
   boardId: string,
-  { content, is_anonymous, images, title }: IaddPostRequest
+  { content, is_anonymous, images, title }: AddPostRequest
 ) => {
   const request = await getRequestWithAccessToken();
   try {

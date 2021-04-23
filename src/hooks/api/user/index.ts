@@ -11,6 +11,16 @@ export const getUser = async (userName: string) => {
   }
 };
 
+export const getMe = async () => {
+  const request = await getRequestWithAccessToken();
+  try {
+    const { data } = await request.get<user>("/me");
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const patchUser = async (
   userName: string,
   newUserName: string,

@@ -5,7 +5,7 @@ import config from "../../../config/config";
 export const getRequestWithAccessToken = async () => {
   AsyncStorage.setItem(
     "accessToken",
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MTg4MzEwMDUsIm5iZiI6MTYxODgzMTAwNSwianRpIjoiMTk2NzRhNTQtNDUyZS00MWE0LTgwOWYtYTg4MGEyOWVmZmYxIiwiZXhwIjoxNjE4ODc0MjA1LCJpZGVudGl0eSI6InBhbmRhdGlAZHNtLmhzLmtyIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIiwidXNlcl9jbGFpbXMiOnsicm9sZXMiOiJwZWFzYW50In19.AQNkkD8JglWpszGz99uEv7I9TQJoRuyNmSAUn18w7G4"
+    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MTkxMzk3OTksIm5iZiI6MTYxOTEzOTc5OSwianRpIjoiY2Y2ZDQxZmItNTc4YS00YTY3LWI4NWUtMDY1NmI3YjZhMjNjIiwiZXhwIjoxNjE5MTgyOTk5LCJpZGVudGl0eSI6InBhbmRhdGlAZHNtLmhzLmtyIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIiwidXNlcl9jbGFpbXMiOnsicm9sZXMiOiJwZWFzYW50In19.My701_ttimU09ekydPASb33mMDJPRoPy8IYu_rhn4Qo"
   );
   const accessToken = await AsyncStorage.getItem("accessToken");
   return axios.create({

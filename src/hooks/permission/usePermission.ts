@@ -3,7 +3,6 @@ import { check, PERMISSIONS, request, RESULTS } from "react-native-permissions";
 import { launchCamera } from "react-native-image-picker";
 import ImagePicker from "react-native-image-crop-picker";
 import { decode } from "base-64";
-import axios from "axios";
 
 export const useCamera = () => {
   const [cameraPermission, setCameraPermission] = useState<boolean>(false);
@@ -27,7 +26,7 @@ export const useCamera = () => {
     if (res === RESULTS.GRANTED) {
       setGalleryPermission(true);
     } else if (res === RESULTS.DENIED) {
-      const res2 = await request(PERMISSIONS.IOS.CAMERA);
+      const res2 = await request(PERMISSIONS.IOS.PHOTO_LIBRARY);
       res2 === RESULTS.GRANTED
         ? setGalleryPermission(true)
         : setGalleryPermission(false);
@@ -52,8 +51,15 @@ export const useCamera = () => {
       includeBase64: true,
       multiple: true,
     });
-    const files = response.map((image) => decode(image.data) as any);
-    setFiles((prevFile) => [...prevFile, ...files]);
+    const files = response.map(
+      (image) =>
+        ({
+          uri: `data:image/png;base64,${image.data}`,
+          type: image.mime,
+          name: image.filename,
+        } as any)
+    );
+    setFiles(files);
   };
 
   return {
