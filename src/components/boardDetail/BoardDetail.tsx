@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import {
   Image,
   ScrollView,
@@ -29,11 +29,13 @@ const BoardDetail = () => {
   const { postList, refreshPostList, getNextPage } = usePostListUseCase(
     boardId
   );
+
   const writeButtonPressHandler = () => {
     navigation.navigate("PostWrite", {
       boardId,
     });
   };
+
   const renderedPostList = useMemo(
     () =>
       postList.map((post: post) => (
@@ -66,6 +68,10 @@ const BoardDetail = () => {
   ) => {
     if (isCloseToBottom(e.nativeEvent)) getNextPage();
   };
+
+  useEffect(() => {
+    refreshPostList();
+  }, [boardId]);
 
   return (
     <View style={S.BoardDetail}>
