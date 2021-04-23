@@ -1,12 +1,7 @@
 import React, { FC, useEffect, useMemo, useState } from "react";
-import {
-  Animated,
-  Dimensions,
-  GestureResponderEvent,
-  Image,
-  View,
-} from "react-native";
+import { Dimensions, GestureResponderEvent, Image, View } from "react-native";
 import Carousel from "react-native-snap-carousel";
+import config from "../../../config/config";
 import S from "../style";
 
 interface Props {
@@ -25,9 +20,15 @@ const Modal: FC<Props> = ({ imageUrls, modal, setModal }) => {
     x: 0,
     y: height,
   });
-  const modalRenderItem = ({ item, index }) => (
-    <Image source={{ uri: item }} key={index} style={S.ModalImage} />
-  );
+  const modalRenderItem = ({ item, index }) => {
+    return (
+      <Image
+        source={{ uri: `${config.IMAGE_URL}${item}` }}
+        key={index}
+        style={S.ModalImage}
+      />
+    );
+  };
   const modalDragMoveHandler = (e: GestureResponderEvent) => {
     const { pageX, pageY } = e.nativeEvent;
     setDragPoint({
@@ -92,6 +93,7 @@ const Modal: FC<Props> = ({ imageUrls, modal, setModal }) => {
     >
       <View style={S.ImageModalWrapper}>
         <Carousel
+          removeClippedSubviews={false}
           renderItem={modalRenderItem}
           data={imageUrls}
           sliderWidth={400}
