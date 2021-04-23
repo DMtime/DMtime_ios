@@ -6,9 +6,10 @@ import S from "./style";
 interface Props {
   setValue: (value: boolean) => void;
   value: boolean;
+  fontSize?: number;
 }
 
-const Checkbox: FC<Props> = ({ setValue, children, value }) => {
+const Checkbox: FC<Props> = ({ setValue, children, value, fontSize }) => {
   const checkboxOnPressHandler = () => {
     setValue(!value);
   };
@@ -21,7 +22,7 @@ const Checkbox: FC<Props> = ({ setValue, children, value }) => {
       <View style={S.Checkbox}>
         {value ? <View style={S.CheckboxContent} /> : <View />}
       </View>
-      <Text>{children}</Text>
+      <Text style={{ fontSize }}>{children}</Text>
     </TouchableOpacity>
   );
 };
