@@ -1,5 +1,6 @@
 import React, { FC, useMemo } from "react";
 import { Image, ScrollView, TouchableOpacity } from "react-native";
+import config from "../../../../config/config";
 import S from "../../style";
 
 interface Props {
@@ -12,7 +13,11 @@ const PostImage: FC<Props> = ({ imageUrls, onClick }) => {
     () =>
       imageUrls.map((imageUrl) => (
         <TouchableOpacity onPress={onClick}>
-          <Image style={S.Image} source={{ uri: imageUrl }} key={imageUrl} />
+          <Image
+            style={S.Image}
+            source={{ uri: `${config.IMAGE_URL}${imageUrl}` }}
+            key={imageUrl}
+          />
         </TouchableOpacity>
       )),
     [imageUrls]
