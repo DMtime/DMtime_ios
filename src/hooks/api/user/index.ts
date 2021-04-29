@@ -56,31 +56,35 @@ export const signup = async (
   }
 };
 
-export const emailDuplicationCheck = async (
+export const emailDuplicationCheckRequest = async (
   email: string
 ): Promise<boolean> => {
   const requestWithOutToken = getRequest();
   try {
-    const { data } = await requestWithOutToken.get<{ useable: boolean }>(
+    const { data } = await requestWithOutToken.get<{ usable: boolean }>(
       `/users/email-duplication?email=${email}`
     );
-    return data.useable;
-  } catch (error) {}
+    return data.usable;
+  } catch (error) {
+    throw error;
+  }
 };
 
-export const userNameDuplicationCheck = async (
+export const userNameDuplicationCheckRequest = async (
   userName: string
 ): Promise<boolean> => {
   const requestWithOutToken = getRequest();
   try {
-    const { data } = await requestWithOutToken.get<{ useable: boolean }>(
+    const { data } = await requestWithOutToken.get<{ usable: boolean }>(
       `/users/username-duplication?username=${userName}`
     );
-    return data.useable;
-  } catch (error) {}
+    return data.usable;
+  } catch (error) {
+    throw error;
+  }
 };
 
-export const signin = async (
+export const signinRequest = async (
   email: string,
   password: string
 ): Promise<string> => {
@@ -93,7 +97,20 @@ export const signin = async (
         password,
       }
     );
+    console.log(data);
     return data.access_token;
+  } catch (error) {
+    console.log(error.response);
+    throw error;
+  }
+};
+
+export const emailVertifyCodeCheckRequest = async (code: string) => {
+  const requestWithOutToken = getRequest();
+  try {
+    await requestWithOutToken.post(
+      `/email-verification-code?verification-code=${code}`
+    );
   } catch (error) {
     throw error;
   }
