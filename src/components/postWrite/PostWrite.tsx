@@ -85,7 +85,6 @@ const PostWrite = () => {
   );
 
   useEffect(() => {
-    console.log(files);
     addImagesAndGetUrls(files);
   }, [files]);
 
