@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { user } from "../../../models/user";
 
 const useSignUp = () => {
   const [password, setPassword] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [nickname, setNickName] = useState<string>("");
+  const [passwordCheck, setPasswordCheck] = useState<string>("");
   return {
     password,
     setPassword,
@@ -12,6 +12,8 @@ const useSignUp = () => {
     setEmail,
     nickname,
     setNickName,
+    passwordCheck,
+    setPasswordCheck,
   };
 };
 
