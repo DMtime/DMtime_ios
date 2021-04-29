@@ -6,17 +6,22 @@ import S from "./style";
 
 interface Props {
   setMenu: (value: boolean) => void;
+  isMenuDisAble?: boolean;
 }
 
-const Header: FC<Props> = ({ setMenu }) => {
+const Header: FC<Props> = ({ setMenu, isMenuDisAble }) => {
   const menuButtonClickHandler = () => {
     setMenu(true);
   };
   return (
     <View style={S.Header}>
-      <TouchableOpacity onPress={menuButtonClickHandler}>
-        <Image style={S.HeaderMenu} source={menu} />
-      </TouchableOpacity>
+      {isMenuDisAble ? (
+        <View style={S.HeaderMenu}></View>
+      ) : (
+        <TouchableOpacity onPress={menuButtonClickHandler}>
+          <Image style={S.HeaderMenu} source={menu} />
+        </TouchableOpacity>
+      )}
       <View style={S.HeaderWrapper}>
         <Image style={S.HeaderLogo} source={logo} />
         <Text style={S.HeaderTitle}>대마타임</Text>
