@@ -6,6 +6,8 @@ import {
   PostDetailPage,
   PostWritePage,
   BoardWritePage,
+  SignInPage,
+  SignUpPage,
 } from "../pages";
 import Header from "../components/header";
 import { NavigationContainer } from "@react-navigation/native";
@@ -30,33 +32,46 @@ const RouterWrapper = () => {
   return (
     <>
       <SafeAreaView style={S}>
-        <Header setMenu={setMenu} />
         <NavigationContainer ref={ref}>
-          <Stack.Navigator initialRouteName="Main">
+          <Stack.Navigator initialRouteName="SignIn">
             <Stack.Screen
-              options={{ headerShown: false }}
+              options={{ header: () => <Header setMenu={setMenu} /> }}
               name="BoardDetail"
               component={BoardDetailPage}
             />
             <Stack.Screen
-              options={{ headerShown: false }}
+              options={{ header: () => <Header setMenu={setMenu} /> }}
               name="PostDetail"
               component={PostDetailPage}
             />
             <Stack.Screen
-              options={{ headerShown: false }}
+              options={{ header: () => <Header setMenu={setMenu} /> }}
               name="PostWrite"
               component={PostWritePage}
             />
             <Stack.Screen
-              options={{ headerShown: false }}
+              options={{ header: () => <Header setMenu={setMenu} /> }}
               name="Main"
               component={MainPage}
             />
             <Stack.Screen
-              options={{ headerShown: false }}
+              options={{ header: () => <Header setMenu={setMenu} /> }}
               name="BoardWrite"
               component={BoardWritePage}
+            />
+            <Stack.Screen
+              options={{
+                header: () => <Header setMenu={setMenu} isMenuDisAble={true} />,
+              }}
+              name="SignIn"
+              component={SignInPage}
+            />
+            <Stack.Screen
+              options={{
+                header: () => <Header setMenu={setMenu} isMenuDisAble={true} />,
+              }}
+              name="SignUp"
+              component={SignUpPage}
             />
           </Stack.Navigator>
         </NavigationContainer>
