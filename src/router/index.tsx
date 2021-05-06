@@ -8,6 +8,7 @@ import {
   BoardWritePage,
   SignInPage,
   SignUpPage,
+  Mypage,
 } from "../pages";
 import Header from "../components/header";
 import { NavigationContainer } from "@react-navigation/native";
@@ -33,7 +34,7 @@ const RouterWrapper = () => {
     <>
       <SafeAreaView style={S}>
         <NavigationContainer ref={ref}>
-          <Stack.Navigator initialRouteName="SignIn">
+          <Stack.Navigator initialRouteName="Main">
             <Stack.Screen
               options={{ header: () => <Header setMenu={setMenu} /> }}
               name="BoardDetail"
@@ -72,6 +73,13 @@ const RouterWrapper = () => {
               }}
               name="SignUp"
               component={SignUpPage}
+            />
+            <Stack.Screen
+              options={{
+                header: () => <Header setMenu={setMenu} isMenuDisAble={true} />,
+              }}
+              name="Mypage"
+              component={Mypage}
             />
           </Stack.Navigator>
         </NavigationContainer>
