@@ -9,7 +9,8 @@ const usePost = () => {
     images: [],
     number_of_likes: 0,
     number_of_dislikes: 0,
-    posted_datetime: "4/6",
+    posted_datetime: "",
+    is_mine: false,
     posted_gallery: {} as board,
     title: "로딩중입니다.",
     uploader: {

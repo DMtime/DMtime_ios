@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const usePostWrite = () => {
   const [postContent, setPostContent] = useState<string>("");
   const [postTitle, setPostTitle] = useState<string>("");
-  const [anonymous, setAnonymous] = useState<boolean>(false);
+  const [anonymous, setAnonymous] = useState<boolean>(true);
   const [images, setImages] = useState<string[]>([]);
   return {
     postContent,
