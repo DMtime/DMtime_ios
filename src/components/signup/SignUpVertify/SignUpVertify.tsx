@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import React, { FC } from "react";
 import { Text, View } from "react-native";
 import useUserVertifyUseCase from "../../../hooks/useCase/user/useUserVertifyUseCase";
@@ -6,9 +7,11 @@ import Input from "../../default/input";
 import S from "../style";
 
 const SignUpVertify: FC = () => {
+  const navigation = useNavigation();
   const { setVertifyCode, emailVertifyCodeCheck } = useUserVertifyUseCase();
   const vertifyCodeButtonClickHandler = async () => {
     await emailVertifyCodeCheck();
+    navigation.navigate("SignIn");
   };
   return (
     <View style={S.SignInVertify}>
