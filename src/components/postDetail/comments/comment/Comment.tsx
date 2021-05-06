@@ -13,6 +13,7 @@ interface Props {
   writeDate: string;
   id: number;
   isSub?: boolean;
+  deleteComment: (id: number) => Promise<void>;
   addComment: (
     isAnonymous: boolean,
     content: string,
@@ -29,6 +30,7 @@ const Comment: FC<Props> = ({
   id,
   isSub,
   addComment,
+  deleteComment,
 }) => {
   const [openInput, setOpenInput] = useState(false);
   const renderedSubComment = useMemo(() => {
@@ -44,12 +46,16 @@ const Comment: FC<Props> = ({
           writeDate={comment.wrote_datetime}
           comments={comments}
           isSub={true}
+          deleteComment={deleteComment}
           addComment={addComment}
         />
       ));
   }, [comments]);
   const toggleOpenInput = () => {
     setOpenInput((openInput) => !openInput);
+  };
+  const deleteButtonClickHandler = async () => {
+    await deleteComment(id);
   };
   return (
     <>
@@ -75,9 +81,14 @@ const Comment: FC<Props> = ({
               </Text>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity>
-            <Text style={S.CommentReport}>신고하기</Text>
-          </TouchableOpacity>
+          <View style={S.ButtonWrapper}>
+            <TouchableOpacity onPress={deleteButtonClickHandler}>
+              <Text style={S.DeleteButton}>삭제하기</Text>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Text style={S.CommentReport}>신고하기</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
       {openInput ? (

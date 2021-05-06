@@ -6,6 +6,7 @@ import Comment from "./comment";
 
 interface Props {
   comments: comment[];
+  deleteComment: (id: number) => Promise<void>;
   addComment: (
     isAnonymous: boolean,
     content: string,
@@ -13,8 +14,8 @@ interface Props {
   ) => void;
 }
 
-// 자기 댓글이면 삭제 버튼 나오게 설정해야함
-const Comments: FC<Props> = ({ comments, addComment }) => {
+const Comments: FC<Props> = ({ comments, addComment, deleteComment }) => {
+  console.log(comments);
   const renderedComment = useMemo(
     () =>
       comments
@@ -29,6 +30,7 @@ const Comments: FC<Props> = ({ comments, addComment }) => {
             writeDate={comment.wrote_datetime}
             id={comment.id}
             addComment={addComment}
+            deleteComment={deleteComment}
           />
         )),
     [comments]
