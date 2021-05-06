@@ -12,13 +12,13 @@ const S = StyleSheet.create({
     alignItems: "center",
   },
   SubButton: {
-    height: 24,
+    height: 26,
     color: "white",
     borderRadius: 3,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: color.main,
-    padding: 3,
+    padding: 6,
   },
 });
 

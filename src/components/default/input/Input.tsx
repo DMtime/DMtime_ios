@@ -15,6 +15,7 @@ interface Props {
   marginBottom?: number;
   placeholder?: string;
   setValue: (value: string) => void;
+  type?: string;
 }
 
 const Input: FC<Props> = ({
@@ -26,6 +27,7 @@ const Input: FC<Props> = ({
   marginTop,
   placeholder,
   setValue,
+  type,
 }) => {
   const inputChangeHandler = (
     e: NativeSyntheticEvent<TextInputChangeEventData>
@@ -43,6 +45,7 @@ const Input: FC<Props> = ({
         marginLeft,
         marginRight,
       }}
+      secureTextEntry={type === "password"}
       onChange={inputChangeHandler}
       placeholder={placeholder}
     />

@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import {
-  Button,
   NativeSyntheticEvent,
   Text,
   TextInput,
@@ -22,6 +21,7 @@ interface Props {
   placeholder?: string;
   setValue: (value: string) => void;
   value?: string;
+  type?: string;
 }
 
 const SubButtonInput: FC<Props> = ({
@@ -36,6 +36,7 @@ const SubButtonInput: FC<Props> = ({
   buttonText,
   onClick,
   value,
+  type,
 }) => {
   const inputChangeHandler = (
     e: NativeSyntheticEvent<TextInputChangeEventData>
@@ -58,7 +59,8 @@ const SubButtonInput: FC<Props> = ({
         value={value}
         onChange={inputChangeHandler}
         placeholder={placeholder}
-        style={{ width: "80%", marginLeft: 10 }}
+        style={{ width: "87%", marginLeft: 10 }}
+        secureTextEntry={type === "password"}
       />
       <TouchableOpacity onPress={onClick} style={S.SubButton}>
         <Text style={{ color: "white" }}>{buttonText}</Text>
