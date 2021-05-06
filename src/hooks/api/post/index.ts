@@ -9,7 +9,7 @@ export const getPostList = async (
   const request = await getRequestWithAccessToken();
   try {
     const { data } = await request.get<{ posts: post[] }>(
-      `/board/posts?gallery-id=${id}&page=${page}&per-page=${20}`
+      `/board/posts?gallery-id=${id}&page=${page}&per-page=30`
     );
     return data.posts;
   } catch (error) {
@@ -57,7 +57,7 @@ export const getPost = async (id: number): Promise<post> => {
   }
 };
 
-export const patchPost = async (post: post) => {
+export const patchPostRequest = async (post: post) => {
   const request = await getRequestWithAccessToken();
   try {
     await request.patch(`/board/posts/${post.id}`);
@@ -66,7 +66,7 @@ export const patchPost = async (post: post) => {
   }
 };
 
-export const deletePost = async (id: number) => {
+export const deletePostRequest = async (id: number) => {
   const request = await getRequestWithAccessToken();
   try {
     await request.delete(`/board/posts/${id}`);

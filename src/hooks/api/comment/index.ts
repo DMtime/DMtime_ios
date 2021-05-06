@@ -13,7 +13,7 @@ export const getCommentsRequest = async (id: number, page: number) => {
   }
 };
 
-export const setCommentsRequest = async (
+export const setCommentRequest = async (
   isAnonymous: boolean,
   content: string,
   postId: number,
@@ -31,7 +31,7 @@ export const setCommentsRequest = async (
   }
 };
 
-export const patchComments = async (
+export const patchCommentRequest = async (
   isAnonymous: boolean,
   content: string,
   postId: number,
@@ -49,7 +49,7 @@ export const patchComments = async (
   }
 };
 
-export const deleteComments = async (id: number) => {
+export const deleteCommentRequest = async (id: number) => {
   const request = await getRequestWithAccessToken();
   try {
     await request.delete(`/board/comments/${id}`);
