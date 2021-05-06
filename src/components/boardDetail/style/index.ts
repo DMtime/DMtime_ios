@@ -54,7 +54,6 @@ const S = StyleSheet.create({
     height: 13,
     width: 1,
     backgroundColor: color.info,
-    marginRight: 8,
     marginLeft: 8,
   },
   BoardDetailItemInfoText: {

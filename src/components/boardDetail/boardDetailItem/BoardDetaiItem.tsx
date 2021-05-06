@@ -34,7 +34,6 @@ const BoardDetailItem: FC<Props> = ({ title, writer, date, like, id }) => {
               </View>
               <View style={S.BoardDetailItemBar} />
               <View style={S.BoardRowElement}>
-                <Text style={S.BoardDetailItemInfo}>날짜</Text>
                 <Text style={S.BoardDetailItemInfoText}>{date}</Text>
               </View>
             </View>
