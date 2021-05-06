@@ -243,6 +243,14 @@ const S = StyleSheet.create({
     zIndex: 100,
     marginTop: 150,
   },
+  DeleteButton: {
+    color: color.error,
+    fontSize: 12,
+    marginRight: 10,
+  },
+  ButtonWrapper: {
+    flexDirection: "row",
+  },
 });
 
 export default S;
