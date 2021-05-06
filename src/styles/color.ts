@@ -5,6 +5,7 @@ const color = {
   item: "white",
   sub: "#C9C9C9",
   info: "#8D8D8D",
+  error: "#EE0000",
 };
 
 export default color;
