@@ -1,6 +1,11 @@
 import { useEffect } from "react";
-import { getCommentsRequest, setCommentsRequest } from "../../api/comment";
+import {
+  deleteCommentRequest,
+  getCommentsRequest,
+  setCommentRequest,
+} from "../../api/comment";
 import useComment from "../../domain/comment/useComment";
+
 const useCommentUseCase = (id: number) => {
   const { setComments, comments, setPage, page } = useComment();
 
@@ -21,12 +26,7 @@ const useCommentUseCase = (id: number) => {
     upperCaseCommentId?: number
   ) => {
     try {
-      await setCommentsRequest(
-        isAnonymous,
-        content,
-        postId,
-        upperCaseCommentId
-      );
+      await setCommentRequest(isAnonymous, content, postId, upperCaseCommentId);
       getCommentsAndSetState();
     } catch (error) {
       console.log(error);
@@ -35,6 +35,14 @@ const useCommentUseCase = (id: number) => {
 
   const refreshComment = async () => {
     await getCommentsAndSetState();
+  };
+
+  const deleteComment = async (id: number) => {
+    try {
+      await deleteCommentRequest(id);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -47,6 +55,7 @@ const useCommentUseCase = (id: number) => {
     getNextCommentAndSetState,
     addComment,
     refreshComment,
+    deleteComment,
   };
 };
 

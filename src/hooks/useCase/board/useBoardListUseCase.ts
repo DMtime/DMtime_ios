@@ -11,7 +11,7 @@ const useBoardListUseCase = (isDefault?: boolean) => {
   };
 
   const refreshBoardList = async () => {
-    await getBoardListAndSetState();
+    getBoardListAndSetState();
   };
 
   useEffect(() => {

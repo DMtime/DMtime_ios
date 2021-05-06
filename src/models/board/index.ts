@@ -12,6 +12,7 @@ export type uploader = {
 export type post = {
   content: string;
   is_anonymous: boolean;
+  is_mine: boolean;
   id: number;
   images: string[];
   number_of_likes: number;

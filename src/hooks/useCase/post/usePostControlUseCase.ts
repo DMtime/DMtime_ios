@@ -1,6 +1,10 @@
 import AddPostRequestDTO from "../../../models/dto/request/postRequest";
 import { addImage } from "../../api/image";
-import { patchPost, addPostRequest } from "../../api/post";
+import {
+  patchPostRequest,
+  addPostRequest,
+  deletePostRequest,
+} from "../../api/post";
 import usePostWrite from "../../domain/post/usePostWrite";
 
 const usePostControlUseCase = (id?: number) => {
@@ -48,7 +52,6 @@ const usePostControlUseCase = (id?: number) => {
   };
 
   return {
-    patchPost,
     addPost,
     setPostContent,
     setPostTitle,

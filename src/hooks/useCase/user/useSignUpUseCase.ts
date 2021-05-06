@@ -6,6 +6,11 @@ import {
 } from "../../api/user";
 import { useState } from "react";
 import { Alert } from "react-native";
+import {
+  EMAIL_REGEXP,
+  NICKNAME_REGEXP,
+  PASSWORD_REGEXP,
+} from "../../../config/regexp";
 const useSignUpUseCase = () => {
   const {
     setEmail,
@@ -35,6 +40,8 @@ const useSignUpUseCase = () => {
       switch (error.response.status) {
         case 409:
           Alert.alert("회원가입", "닉네임이 중복되었습니다.");
+        case 404:
+          Alert.alert("회원가입", "서버에서 에러가 발생했습니다.");
       }
     }
   };
@@ -42,9 +49,7 @@ const useSignUpUseCase = () => {
   const emailDuplicationCheckWithEmail = async () => {
     const emailDuplication = await emailDuplicationCheckRequest(email);
     setEmailVertified(emailDuplication);
-    if (emailDuplication) {
-      Alert.alert("이메일 중복 확인", "이메일 중복 확인 되었습니다.");
-    } else {
+    if (!emailDuplication) {
       Alert.alert(
         "이메일 중복 확인",
         "이메일이 중복됩니다. 다른 이메일을 사용해 주세요."
@@ -55,9 +60,7 @@ const useSignUpUseCase = () => {
   const userNameDuplicationCheckWithUserName = async () => {
     const userNameDuplicate = await userNameDuplicationCheckRequest(nickname);
     setNickNameVertified(userNameDuplicate);
-    if (userNameDuplicate)
-      Alert.alert("닉네임 중복 확인", "닉네임 중복 확인 되었습니다.");
-    else
+    if (!userNameDuplicate)
       Alert.alert(
         "닉네임 중복 확인",
         "닉네임이 중복됩니다. 다른 닉네임을 사용해 주세요."
@@ -76,6 +79,15 @@ const useSignUpUseCase = () => {
     signup: signupWithValue,
     emailDuplicationCheckRequest: emailDuplicationCheckWithEmail,
     userNameDuplicationCheckRequest: userNameDuplicationCheckWithUserName,
+    emailVertified,
+    nickNameVertified,
+
+    dataCheck: {
+      emailError: !EMAIL_REGEXP.test(email) && email !== "",
+      passwordError: !PASSWORD_REGEXP.test(password) && password !== "",
+      nickNameError: !NICKNAME_REGEXP.test(nickname) && nickname !== "",
+      passwordCheckError: password !== passwordCheck && passwordCheck !== "",
+    },
   };
 };
 

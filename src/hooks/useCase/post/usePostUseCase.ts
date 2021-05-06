@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import usePost from "../../domain/post/usePost";
 import {
-  deletePost,
+  deletePostRequest,
   getPost,
   removePostDisLike,
   removePostLike,
@@ -26,6 +26,7 @@ const usePostUseCase = (id: number) => {
   const getPostAndSetState = async () => {
     const data = await getPost(id);
     setPost(data);
+    console.log(data);
   };
 
   const setToggleLike = async (id: number) => {
@@ -97,6 +98,12 @@ const usePostUseCase = (id: number) => {
 
   const refreshPost = async () => {
     await getPostAndSetState();
+  };
+
+  const deletePost = async (boardId: number) => {
+    try {
+      deletePostRequest(boardId);
+    } catch (error) {}
   };
 
   useEffect(() => {
