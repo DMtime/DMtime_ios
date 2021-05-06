@@ -7,7 +7,7 @@ const Stack = createStackNavigator();
 
 const SignUp: FC = () => {
   return (
-    <Stack.Navigator initialRouteName="SignUpVertify">
+    <Stack.Navigator initialRouteName="SignUpInfo">
       <Stack.Screen
         options={{
           headerShown: false,
