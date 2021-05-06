@@ -4,6 +4,7 @@ import {
   GestureResponderEvent,
   TouchableOpacity,
   ScrollView,
+  View,
 } from "react-native";
 import S from "./style";
 import MenuItem from "./MenuItem";
@@ -11,14 +12,15 @@ import MenuHeader from "./MenuHeader";
 import Animated, { Easing } from "react-native-reanimated";
 import useUserUseCase from "../../hooks/useCase/user/useUserUseCase";
 import useBoardListUseCase from "../../hooks/useCase/board/useBoardListUseCase";
+import MenuFooter from "./MenuFooter";
 
 interface Props {
   setMenu: (value: boolean) => void;
-  navigate: (page: string, params: object) => void;
+  navigate: (page: string, params?: object) => void;
 }
 
 const Menu: FC<Props> = ({ setMenu, navigate }) => {
-  const { user, getMeAndSetState } = useUserUseCase();
+  const { user, getMeAndSetState } = useUserUseCase({ isMine: true });
   const { boardList } = useBoardListUseCase();
   const fadeAnimation = useRef(new Animated.Value(0)).current;
 
@@ -65,6 +67,21 @@ const Menu: FC<Props> = ({ setMenu, navigate }) => {
       )),
     [boardList]
   );
+
+  const boardWriteButtonClickHandler = () => {
+    navigate("BoardWrite");
+    setMenu(false);
+  };
+
+  const logout = () => {
+    setMenu(false);
+    navigate("SignIn");
+  };
+
+  const goMypage = () => {
+    navigate("MyPage");
+  };
+
   return (
     <SafeAreaView style={S.MainWrapper}>
       <TouchableOpacity
@@ -74,9 +91,16 @@ const Menu: FC<Props> = ({ setMenu, navigate }) => {
       />
       <Animated.View style={{ ...S.MenuWrapper, width: fadeAnimation }}>
         <ScrollView style={S.Menu}>
-          <MenuHeader userImage={user.profile_image} userName={user.username} />
-          {renderedMenuItem}
+          <View style={{ width: 492 }}>
+            <MenuHeader
+              userImage={user.profile_image}
+              userName={user.username}
+              boardWriteButtonClickHandler={boardWriteButtonClickHandler}
+            />
+            {renderedMenuItem}
+          </View>
         </ScrollView>
+        <MenuFooter logout={logout} goMypage={goMypage} />
       </Animated.View>
     </SafeAreaView>
   );

@@ -20,9 +20,7 @@ const S = StyleSheet.create({
     overflow: "hidden",
   },
   MenuItem: {
-    borderBottomColor: color.sub,
-    borderBottomWidth: 1,
-    padding: 10,
+    padding: 20,
   },
   MainItemText: {
     fontSize: 16,
@@ -60,6 +58,14 @@ const S = StyleSheet.create({
   },
   MainuserWrapper: {
     alignItems: "center",
+  },
+  MenuButtonWrapper: {
+    marginTop: 10,
+    width: "100%",
+    alignItems: "flex-end",
+  },
+  MenuText: {
+    color: color.item,
   },
 });
 
