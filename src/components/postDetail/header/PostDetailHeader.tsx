@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import S from "../style";
 
 interface Props {
@@ -7,9 +7,18 @@ interface Props {
   writer: string;
   date: string;
   like: number;
+  deletePost: () => void;
+  isMine: boolean;
 }
 
-const PostDetailBody: FC<Props> = ({ title, writer, date, like }) => {
+const PostDetailBody: FC<Props> = ({
+  title,
+  writer,
+  date,
+  like,
+  deletePost,
+  isMine,
+}) => {
   return (
     <View style={S.Header}>
       <Text style={S.Title}>{title}</Text>
@@ -22,6 +31,13 @@ const PostDetailBody: FC<Props> = ({ title, writer, date, like }) => {
           <Text style={S.InfoText}>{date}</Text>
         </View>
         <View style={S.InfoView}>
+          {isMine ? (
+            <TouchableOpacity onPress={deletePost}>
+              <Text style={S.deleteButton}>삭제하기</Text>
+            </TouchableOpacity>
+          ) : (
+            <></>
+          )}
           <Text style={S.Info}>추천수</Text>
           <Text style={S.InfoText}>{like}</Text>
         </View>
