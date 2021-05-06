@@ -41,6 +41,7 @@ const SignIn: FC = () => {
           setValue={setPassword}
           placeholder="비밀번호를 입력하세요."
           marginBottom={35}
+          type="password"
         />
         <Button onPress={signInButtonClickHandler}>로그인</Button>
         <View style={S.Footer}>
