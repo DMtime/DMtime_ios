@@ -272,8 +272,13 @@ PODS:
   - react-native-mmkv (1.1.6):
     - MMKV
     - React-Core
+  - react-native-pager-view (5.1.7):
+    - React-Core
   - react-native-safe-area-context (3.2.0):
     - React-Core
+  - react-native-simple-toast (1.1.3):
+    - React-Core
+    - Toast (~> 4.0.0)
   - React-RCTActionSheet (0.63.4):
     - React-Core/RCTActionSheetHeaders (= 0.63.4)
   - React-RCTAnimation (0.63.4):
@@ -353,6 +358,7 @@ PODS:
     - React-Core
   - RNScreens (2.15.2):
     - React-Core
+  - Toast (4.0.0)
   - TOCropViewController (2.6.0)
   - UMAppLoader (1.4.0)
   - UMBarCodeScannerInterface (5.4.0)
@@ -427,7 +433,9 @@ DEPENDENCIES:
   - "react-native-blur (from `../node_modules/@react-native-community/blur`)"
   - "react-native-image-picker (from `../node_modules/@connectedbits/react-native-image-picker`)"
   - react-native-mmkv (from `../node_modules/react-native-mmkv`)
+  - react-native-pager-view (from `../node_modules/react-native-pager-view`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
+  - react-native-simple-toast (from `../node_modules/react-native-simple-toast`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
   - React-RCTBlob (from `../node_modules/react-native/Libraries/Blob`)
@@ -464,6 +472,7 @@ SPEC REPOS:
     - boost-for-react-native
     - MMKV
     - MMKVCore
+    - Toast
     - TOCropViewController
 
 EXTERNAL SOURCES:
@@ -569,8 +578,12 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@connectedbits/react-native-image-picker"
   react-native-mmkv:
     :path: "../node_modules/react-native-mmkv"
+  react-native-pager-view:
+    :path: "../node_modules/react-native-pager-view"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
+  react-native-simple-toast:
+    :path: "../node_modules/react-native-simple-toast"
   React-RCTActionSheet:
     :path: "../node_modules/react-native/Libraries/ActionSheetIOS"
   React-RCTAnimation:
@@ -687,7 +700,9 @@ SPEC CHECKSUMS:
   react-native-blur: cad4d93b364f91e7b7931b3fa935455487e5c33c
   react-native-image-picker: aa6c5c3b5afb901dd7f2308d52d1953ee6610e92
   react-native-mmkv: 3c7db3a68afb5be477e5231729da0e714afe1277
+  react-native-pager-view: a10e94628bf100ff9a377ebc63690c8c05358ab7
   react-native-safe-area-context: e471852c5ed67eea4b10c5d9d43c1cebae3b231d
+  react-native-simple-toast: b986e6c1befdc211af3df1bae293278a44e32990
   React-RCTActionSheet: 89a0ca9f4a06c1f93c26067af074ccdce0f40336
   React-RCTAnimation: 1bde3ecc0c104c55df246eda516e0deb03c4e49b
   React-RCTBlob: a97d378b527740cc667e03ebfa183a75231ab0f0
@@ -704,6 +719,7 @@ SPEC CHECKSUMS:
   RNPermissions: eb94f9fdc0a8ecd02fcce0676d56ffb1395d41e1
   RNReanimated: e03f7425cb7a38dcf1b644d680d1bfc91c3337ad
   RNScreens: 3d682bcaba69a4f8e55543d90818704f34338db1
+  Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
   TOCropViewController: 3105367e808b7d3d886a74ff59bf4804e7d3ab38
   UMAppLoader: 515d02d30e29cf05bbe58f77c59f896840cc5895
   UMBarCodeScannerInterface: 77a5bebdc21106979a363bb057c4fbb46aacc171
