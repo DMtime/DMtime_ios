@@ -67,6 +67,10 @@ const PostWrite = () => {
     } catch (error) {}
   };
 
+  const openGalleryButtonClickHandler = () => {
+    openGallery(true);
+  };
+
   const goBackButtonClickHandler = () => {
     navigation.goBack();
   };
@@ -87,10 +91,6 @@ const PostWrite = () => {
   useEffect(() => {
     addImagesAndGetUrls(files);
   }, [files]);
-
-  useEffect(() => {
-    console.log(images);
-  }, [images]);
 
   useEffect(() => {
     if (boardId.length < 0) {
@@ -130,7 +130,10 @@ const PostWrite = () => {
         <Checkbox setValue={setAnonymous} value={anonymous}>
           익명으로 작성
         </Checkbox>
-        <TouchableOpacity style={S.Button} onPress={openGallery}>
+        <TouchableOpacity
+          style={S.Button}
+          onPress={openGalleryButtonClickHandler}
+        >
           <Text style={S.ButtonText}>사진 첨부</Text>
         </TouchableOpacity>
       </View>

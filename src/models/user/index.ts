@@ -3,3 +3,5 @@ export type user = {
   profile_image: string;
   username: string;
 };
+
+export type mypageContentType = "write" | "like" | "comment";

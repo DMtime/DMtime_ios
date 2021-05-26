@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { check, PERMISSIONS, request, RESULTS } from "react-native-permissions";
 import { launchCamera } from "react-native-image-picker";
-import ImagePicker from "react-native-image-crop-picker";
-import { decode } from "base-64";
+import ImagePicker, { Image } from "react-native-image-crop-picker";
+import { addImage } from "../api/image";
 
 export const useCamera = () => {
   const [cameraPermission, setCameraPermission] = useState<boolean>(false);
@@ -45,21 +45,38 @@ export const useCamera = () => {
       );
   };
 
-  const openGallery = async () => {
+  const responseToFile = (response: Image) => ({
+    uri: `data:image/png;base64,${response.data}`,
+    type: response.mime,
+    name: response.filename,
+  });
+
+  const openGallery = async (multiple: boolean = true) => {
+    let files;
     const response = await ImagePicker.openPicker({
       mediaType: "photo",
       includeBase64: true,
-      multiple: true,
+      multiple,
     });
-    const files = response.map(
-      (image) =>
-        ({
-          uri: `data:image/png;base64,${image.data}`,
-          type: image.mime,
-          name: image.filename,
-        } as any)
-    );
-    setFiles(files);
+    if (multiple) {
+      files = (response as any).map(responseToFile);
+    } else {
+      files = [responseToFile(response)];
+    }
+    setFiles(files as Blob[]);
+  };
+
+  const addImagesAndGetUrls = async (files: Blob[]) => {
+    const requests = files.map(async (file) => {
+      const image = await addImage(file);
+      return image;
+    });
+    try {
+      const urls = await Promise.all(requests);
+      return urls;
+    } catch (error) {
+      console.log(error.response);
+    }
   };
 
   return {
@@ -68,5 +85,6 @@ export const useCamera = () => {
     openCamera,
     openGallery,
     files,
+    addImagesAndGetUrls,
   };
 };

@@ -1,13 +1,12 @@
 import AddPostRequestDTO from "../../../models/dto/request/postRequest";
 import { addImage } from "../../api/image";
-import {
-  patchPostRequest,
-  addPostRequest,
-  deletePostRequest,
-} from "../../api/post";
+import { addPostRequest } from "../../api/post";
 import usePostWrite from "../../domain/post/usePostWrite";
+import Toast from "react-native-simple-toast";
+import { useNavigation } from "@react-navigation/native";
 
 const usePostControlUseCase = (id?: number) => {
+  const navigation = useNavigation();
   const {
     setPostContent,
     setPostTitle,
@@ -28,7 +27,11 @@ const usePostControlUseCase = (id?: number) => {
       const urls = await Promise.all(requests);
       setImages(urls);
     } catch (error) {
-      console.log(error.response);
+      switch (error.response.status) {
+        case 401:
+          Toast.show("토큰이 만료되었습니다.");
+          navigation.navigate("SignIn");
+      }
     }
   };
 
@@ -47,7 +50,11 @@ const usePostControlUseCase = (id?: number) => {
         .setTitle(title);
       addPostRequest(boardId, requestDTO);
     } catch (error) {
-      throw error;
+      switch (error.response.status) {
+        case 401:
+          Toast.show("토큰이 만료되었습니다.");
+          navigation.navigate("SignIn");
+      }
     }
   };
 

@@ -1,26 +1,30 @@
-import React from "react";
-import { Image, Text, View } from "react-native";
+import React, { useState } from "react";
+import { View } from "react-native";
+import useUserPostUseCase from "../../hooks/useCase/mypage/useUserPostUseCase";
 import useUserUseCase from "../../hooks/useCase/user/useUserUseCase";
-import S from "./style";
-import { defaultUserImage } from "../../statics/main";
+import MypageContent from "./content";
+import UserForm from "./form";
+import MypagePostViewer from "./postViewer";
+import MypageUserInfo from "./user";
 
 const Mypage = () => {
-  const { user } = useUserUseCase({ isMine: true });
-  console.log(user);
+  const { user, setUserInfo, setUser } = useUserUseCase({ isMine: true });
+  const { setType, type, mypagePost } = useUserPostUseCase(user.username);
+  const [changeInfo, setChangeInfo] = useState<boolean>(false);
   return (
     <View>
-      <View style={S.Header}>
-        <Image
-          style={S.HeaderUserImage}
-          source={
-            user.profile_image ? { uri: user.profile_image } : defaultUserImage
-          }
+      {changeInfo ? (
+        <UserForm
+          user={user}
+          setChangeInfo={setChangeInfo}
+          setUserInfo={setUserInfo}
+          setUser={setUser}
         />
-        <Text style={S.HeaderUserName}>{user.username}</Text>
-        <Text style={S.HeaderUserDescription}>
-          {user.explain ? user.explain : "설명이 없습니다."}
-        </Text>
-      </View>
+      ) : (
+        <MypageUserInfo user={user} setChangeInfo={setChangeInfo} />
+      )}
+      <MypageContent type={type} setType={setType} />
+      <MypagePostViewer {...mypagePost} type={type} setType={setType} />
     </View>
   );
 };

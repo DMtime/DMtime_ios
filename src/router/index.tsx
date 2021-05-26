@@ -76,7 +76,9 @@ const RouterWrapper = () => {
             />
             <Stack.Screen
               options={{
-                header: () => <Header setMenu={setMenu} isMenuDisAble={true} />,
+                header: () => (
+                  <Header setMenu={setMenu} isMenuDisAble={false} />
+                ),
               }}
               name="Mypage"
               component={Mypage}

@@ -15,7 +15,12 @@ const MenuHeader: FC<Props> = ({
   boardWriteButtonClickHandler,
 }) => {
   const userImageUrl = useMemo(
-    () => (userImage ? userImage : defaultUserImage),
+    () =>
+      userImage
+        ? {
+            uri: `https://dmtimebucket.s3.ap-northeast-2.amazonaws.com/images/${userImage}`,
+          }
+        : defaultUserImage,
     [userImage]
   );
   return (

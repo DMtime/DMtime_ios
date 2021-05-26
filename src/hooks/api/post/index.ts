@@ -2,7 +2,7 @@ import { post } from "../../../models/board";
 import { getRequestWithAccessToken } from "../default";
 import { AddPostRequest } from "../../../models/dto/request/postRequest";
 
-export const getPostList = async (
+export const getPostListRequest = async (
   id: string,
   page: number
 ): Promise<post[]> => {
@@ -13,7 +13,6 @@ export const getPostList = async (
     );
     return data.posts;
   } catch (error) {
-    console.log(error.response);
     throw error.response.status;
   }
 };
@@ -22,7 +21,7 @@ export const getPopularPostList = async (page: number): Promise<post[]> => {
   const request = await getRequestWithAccessToken();
   try {
     const { data } = await request.get<post[]>(
-      `/board/posts/hot?page=${1}&per-page=${20}`
+      `/board/posts/hot?page=${page}&per-page=${20}`
     );
     return data;
   } catch (error) {
@@ -75,7 +74,7 @@ export const deletePostRequest = async (id: number) => {
   }
 };
 
-export const setPostLike = async (id: number) => {
+export const setPostLikeRequest = async (id: number) => {
   const request = await getRequestWithAccessToken();
   try {
     await request.post(`/board/posts/${id}/like`);
@@ -84,7 +83,7 @@ export const setPostLike = async (id: number) => {
   }
 };
 
-export const setPostDisLike = async (id: number) => {
+export const setPostDisLikeRequest = async (id: number) => {
   const request = await getRequestWithAccessToken();
   try {
     await request.post(`/board/posts/${id}/dislike`);
@@ -93,7 +92,7 @@ export const setPostDisLike = async (id: number) => {
   }
 };
 
-export const removePostLike = async (id: number) => {
+export const removePostLikeRequest = async (id: number) => {
   const request = await getRequestWithAccessToken();
   try {
     await request.delete(`/board/posts/${id}/like`);
@@ -102,11 +101,59 @@ export const removePostLike = async (id: number) => {
   }
 };
 
-export const removePostDisLike = async (id: number) => {
+export const removePostDisLikeRequest = async (id: number) => {
   const request = await getRequestWithAccessToken();
   try {
     await request.delete(`/board/posts/${id}/dislike`);
   } catch (error) {
     throw error;
+  }
+};
+
+export const getUserLikePostRequest = async (
+  username: string,
+  page: number
+): Promise<post[]> => {
+  const request = await getRequestWithAccessToken();
+  try {
+    const { data } = await request.get<{ posts: post[] }>(
+      `/users/${username}/liked-posts?page=${page}&per-page=30`
+    );
+    return data.posts;
+  } catch (error) {
+    console.log(error.response);
+    throw error;
+  }
+};
+
+export const getUserWriteCommentPostRequest = async (
+  username: string,
+  page: number
+): Promise<post[]> => {
+  const request = await getRequestWithAccessToken();
+  try {
+    const { data } = await request.get<{ posts: post[] }>(
+      `/users/${username}/posts-wrote-comment?page=${page}&per-page=30`
+    );
+    return data.posts;
+  } catch (error) {
+    console.log(error.response);
+    throw error;
+  }
+};
+
+export const getUserPostRequest = async (
+  username: string,
+  page: number
+): Promise<post[]> => {
+  const request = await getRequestWithAccessToken();
+  try {
+    const { data } = await request.get<{ posts: post[] }>(
+      `/board/posts?username=${username}&page=${page}&per-page=30`
+    );
+    return data.posts;
+  } catch (error) {
+    console.log(error.response);
+    throw error.response.status;
   }
 };

@@ -16,6 +16,7 @@ const S = StyleSheet.create({
   },
   MenuWrapper: {
     height: "100%",
+    width: 265,
     backgroundColor: color.item,
     overflow: "hidden",
   },
@@ -34,7 +35,7 @@ const S = StyleSheet.create({
     position: "absolute",
   },
   MenuHeader: {
-    width: "100%",
+    width: 265,
     height: 150,
     backgroundColor: color.main,
     alignItems: "flex-start",
@@ -45,6 +46,7 @@ const S = StyleSheet.create({
   MenuUserImage: {
     width: 65,
     height: 65,
+    borderRadius: 65,
   },
   MenuUserName: {
     fontSize: 15,

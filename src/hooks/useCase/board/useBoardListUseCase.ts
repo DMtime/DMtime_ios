@@ -6,8 +6,13 @@ const useBoardListUseCase = (isDefault?: boolean) => {
   const { boardList, setBoardList } = useBoardList();
 
   const getBoardListAndSetState = async () => {
-    const data = await getBoardListRequest(isDefault);
-    setBoardList(data);
+    try {
+      const data = await getBoardListRequest(isDefault);
+      setBoardList(data);
+    } catch (error) {
+      switch (error.response.status) {
+      }
+    }
   };
 
   const refreshBoardList = async () => {

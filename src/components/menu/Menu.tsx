@@ -79,7 +79,8 @@ const Menu: FC<Props> = ({ setMenu, navigate }) => {
   };
 
   const goMypage = () => {
-    navigate("MyPage");
+    setMenu(false);
+    navigate("Mypage");
   };
 
   return (

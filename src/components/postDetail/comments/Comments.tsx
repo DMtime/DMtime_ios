@@ -15,7 +15,6 @@ interface Props {
 }
 
 const Comments: FC<Props> = ({ comments, addComment, deleteComment }) => {
-  console.log(comments);
   const renderedComment = useMemo(
     () =>
       comments

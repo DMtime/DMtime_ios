@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import { useEffect } from "react";
 import {
   deleteCommentRequest,
@@ -5,9 +6,11 @@ import {
   setCommentRequest,
 } from "../../api/comment";
 import useComment from "../../domain/comment/useComment";
+import Toast from "react-native-simple-toast";
 
 const useCommentUseCase = (id: number) => {
   const { setComments, comments, setPage, page } = useComment();
+  const navigation = useNavigation();
 
   const getCommentsAndSetState = async () => {
     const comments = await getCommentsRequest(id, page);
@@ -29,7 +32,11 @@ const useCommentUseCase = (id: number) => {
       await setCommentRequest(isAnonymous, content, postId, upperCaseCommentId);
       getCommentsAndSetState();
     } catch (error) {
-      console.log(error);
+      switch (error.response.status) {
+        case 401:
+          Toast.show("토큰이 만료되었습니다.");
+          navigation.navigate("SignIn");
+      }
     }
   };
 
@@ -41,7 +48,11 @@ const useCommentUseCase = (id: number) => {
     try {
       await deleteCommentRequest(id);
     } catch (error) {
-      console.log(error);
+      switch (error.response.status) {
+        case 401:
+          Toast.show("토큰이 만료되었습니다.");
+          navigation.navigate("SignIn");
+      }
     }
   };
 

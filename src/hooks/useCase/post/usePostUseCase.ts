@@ -3,13 +3,16 @@ import usePost from "../../domain/post/usePost";
 import {
   deletePostRequest,
   getPost,
-  removePostDisLike,
-  removePostLike,
-  setPostDisLike,
-  setPostLike,
+  removePostDisLikeRequest,
+  removePostLikeRequest,
+  setPostDisLikeRequest,
+  setPostLikeRequest,
 } from "../../api/post";
+import Toast from "react-native-simple-toast";
+import { useNavigation } from "@react-navigation/native";
 
 const usePostUseCase = (id: number) => {
+  const navigation = useNavigation();
   const { post, setPost } = usePost();
   const setPostReaction = (reaction: "none" | "like" | "dislike") => {
     setPost((post) => ({ ...post, my_reaction: reaction }));
@@ -24,9 +27,17 @@ const usePostUseCase = (id: number) => {
   };
 
   const getPostAndSetState = async () => {
-    const data = await getPost(id);
-    setPost(data);
-    console.log(data);
+    try {
+      const data = await getPost(id);
+      setPost(data);
+    } catch (error) {
+      switch (error.response.status) {
+        case 401: {
+          Toast.show("토큰이 만료되었습니다.");
+          navigation.navigate("SignIn");
+        }
+      }
+    }
   };
 
   const setToggleLike = async (id: number) => {
@@ -58,7 +69,7 @@ const usePostUseCase = (id: number) => {
 
   const setDislike = async (id: number) => {
     try {
-      await setPostDisLike(id);
+      await setPostDisLikeRequest(id);
       setPostReaction("dislike");
       setPostDisLikeCount(post.number_of_dislikes + 1);
     } catch (error) {
@@ -68,7 +79,7 @@ const usePostUseCase = (id: number) => {
 
   const setLike = async (id: number) => {
     try {
-      await setPostLike(id);
+      await setPostLikeRequest(id);
       setPostReaction("like");
       setPostLikeCount(post.number_of_likes + 1);
     } catch (error) {
@@ -78,7 +89,7 @@ const usePostUseCase = (id: number) => {
 
   const removeDisLike = async (id: number) => {
     try {
-      await removePostDisLike(id);
+      await removePostDisLikeRequest(id);
       setPostReaction("none");
       setPostDisLikeCount(post.number_of_dislikes - 1);
     } catch (error) {
@@ -88,7 +99,7 @@ const usePostUseCase = (id: number) => {
 
   const removeLike = async (id: number) => {
     try {
-      await removePostLike(id);
+      await removePostLikeRequest(id);
       setPostReaction("none");
       setPostLikeCount(post.number_of_likes - 1);
     } catch (error) {
@@ -114,7 +125,7 @@ const usePostUseCase = (id: number) => {
     post,
     setPost,
     deletePost,
-    setPostLike,
+    setPostLikeRequest,
     setToggleDisLike,
     setToggleLike,
     refreshPost,

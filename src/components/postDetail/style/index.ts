@@ -251,6 +251,11 @@ const S = StyleSheet.create({
   ButtonWrapper: {
     flexDirection: "row",
   },
+  deleteButton: {
+    fontSize: 12,
+    color: color.error,
+    marginRight: 10,
+  },
 });
 
 export default S;

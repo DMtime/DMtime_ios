@@ -21,20 +21,21 @@ export const getMe = async () => {
   }
 };
 
-export const patchUser = async (
+export const patchUserRequest = async (
   userName: string,
   newUserName: string,
   newUserExplain: string,
-  profileImageId: number
+  profileImageId: string
 ) => {
   const request = await getRequestWithAccessToken();
   try {
-    await request.patch(`/users/${userName}`, {
-      profile_image_id: profileImageId,
+    await request.put(`/users/${userName}`, {
+      profile_image: profileImageId,
       user_explain: newUserExplain,
       username: newUserName,
     });
   } catch (error) {
+    console.log(error.response);
     throw error;
   }
 };
@@ -97,7 +98,6 @@ export const signinRequest = async (
         password,
       }
     );
-    console.log(data);
     return data.access_token;
   } catch (error) {
     console.log(error.response);
@@ -114,4 +114,11 @@ export const emailVertifyCodeCheckRequest = async (code: string) => {
   } catch (error) {
     throw error;
   }
+};
+
+export const refreshTokenRequest = async () => {
+  const requestWithOutToken = getRequest();
+  try {
+    // await requestWithOutToken.get()
+  } catch (error) {}
 };
